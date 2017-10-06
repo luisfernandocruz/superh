@@ -48,7 +48,27 @@
                     <ul class="nav navbar-nav">
                         &nbsp;
                     </ul>
+                    <ul class="nav navbar-nav">
+                        <li class="navbar-heade">
+                            <a class="nav-link" href="{{ url('/categoria') }}">Categorias<span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="navbar-heade">
+                            <a class="nav-link" href="{{ url('/proveedor') }}">Provedores</a>
+                        </li>
+                        <li class="navbar-heade">
+                            <a class="nav-link" href="{{ url('/producto') }}">Productos<span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="navbar-headenavbar-heade">
+                            <a class="nav-link" href="{{ url('/venta') }}">Ventas</a>
+                        </li>
+                        <li class="navbar-heade">
+                            <a class="nav-link" href="{{ url('/factura') }}">Facturas<span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="navbar-heade">
+                            <a class="nav-link" href="{{ url('/detalleventa') }}">Detalle de V.</a>
+                        </li>
 
+                    </ul>
                     <!-- Right Side Of Navbar -->
                     <ul class="nav navbar-nav navbar-right">
                         <!-- Authentication Links -->
