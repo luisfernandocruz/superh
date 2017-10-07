@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Venta;
 
 class VentaController extends Controller
 {
@@ -13,7 +14,8 @@ class VentaController extends Controller
      */
     public function index()
     {
-        //
+        $ventas = Venta::all();
+        return view('venta.index', ["venta" => $ventas]);
     }
 
     /**
@@ -23,7 +25,8 @@ class VentaController extends Controller
      */
     public function create()
     {
-        //
+        $venta = new Venta;
+        return view("venta.create", ["venta" => $venta]);
     }
 
     /**
@@ -34,7 +37,18 @@ class VentaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $venta = new Venta;
+        
+        $venta->usuario_id=$request->usuario_id;
+        /*$categoria->user_id= Auth::user()->id;*/
+        
+        $venta->save();
+
+        if($venta->save()){
+            return redirect("/venta");
+        }else{
+            return view("venta.create");
+        }
     }
 
     /**
@@ -56,7 +70,8 @@ class VentaController extends Controller
      */
     public function edit($id)
     {
-        //
+        $venta = Venta::find($id);
+        return view("venta.edit", ["venta" => $venta]);
     }
 
     /**
@@ -68,7 +83,15 @@ class VentaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $venta = Venta::find($id);
+        
+        $venta->usuario_id=$request->usuario_id;
+        
+        if($venta->save()){
+            return redirect("/venta");
+        }else{
+            return view("venta.edit");
+        }
     }
 
     /**
@@ -79,6 +102,8 @@ class VentaController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Venta::destroy($id);
+
+        return redirect('/venta');
     }
 }

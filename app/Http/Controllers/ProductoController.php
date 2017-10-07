@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Producto;
+use App\Proveedor;
+use App\categoria;
 
 class ProductoController extends Controller
 {
@@ -14,7 +16,6 @@ class ProductoController extends Controller
      */
     public function index()
     {
-        //
         $producto = Producto::all();
         return view('producto.index', ["producto" => $producto]);
     }
@@ -26,9 +27,10 @@ class ProductoController extends Controller
      */
     public function create()
     {
-        //
         $producto = new Producto;
-        return view("producto.create", ["producto" => $producto]);
+        $proveedor=Proveedor::orderBy('nombre', 'ASC')->pluck('nombre', 'id');
+        $categoria=Categoria::orderBy('nombre', 'ASC')->pluck('nombre', 'id');
+        return view("producto.create", ["producto" => $producto])->with('proveedores', $proveedor)->with('categorias', $categoria);
     }
 
     /**
@@ -44,6 +46,11 @@ class ProductoController extends Controller
         
         $producto->nombre=$request->nombre;
         /*$categoria->user_id= Auth::user()->id;*/
+        $producto->precio=$request->precio;
+        $producto->cantidad=$request->cantidad;
+        $producto->tipo_cantidad=$request->tipo_cantidad;
+        $producto->proveedor_id=$request->proveedor_id;
+        $producto->categoria_id=$request->categoria_id;
         
         $producto->save();
 
@@ -73,9 +80,9 @@ class ProductoController extends Controller
      */
     public function edit($id)
     {
-        //
-        $producto = Producto::find($id);
-        return view("producto.edit", ["producto" => $producto]);
+        $producto = new Producto;
+        $proveedor=Proveedor::orderBy('nombre', 'ASC')->pluck('nombre', 'id');
+        return view("producto.create", ["producto" => $producto])->with('nombre', $proveedor);
     }
 
     /**
@@ -91,6 +98,11 @@ class ProductoController extends Controller
         $producto = Producto::find($id);
         
         $producto->nombre=$request->nombre;
+        $producto->precio=$request->precio;
+        $producto->cantidad=$request->cantidad;
+        $producto->tipo_cantidad=$request->tipo_cantidad;
+        $producto->proveedor_id=$request->proveedor_id;
+        $producto->categoria_id=$request->categoria_id;
         
         if($producto->save()){
             return redirect("/producto");

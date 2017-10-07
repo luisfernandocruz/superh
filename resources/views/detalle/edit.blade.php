@@ -6,8 +6,8 @@
 
 @section("content")
 	<div class="container white">
-		<h1>Editar Categoria</h1>
+		<h1>Editar Detalle de venta</h1>
 		<!--formulario-->
-		@include('categoria.form', ['categoria'=>$categoria, 'url'=>'/categoria/'.$categoria->id, 'method' => 'PATCH'])
+		@include('detalle.form', ['detalle'=>$detalleventa, 'url'=>'/detalle/'.$detalleventa->id, 'method' => 'PATCH'])
 	</div>
 @endsection

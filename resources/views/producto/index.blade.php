@@ -1,4 +1,8 @@
 @extends('layouts.app')
+@extends('layouts.nav')
+
+@section('nav')
+@endsection
 
 @section('content')
 <div class="big-padding text-center blue-grey white-text">
@@ -9,6 +13,10 @@
 		<thead>
 			<tr>
 				<td>Producto</td>
+				<td>Precio</td>
+				<td>Cantidad</td>
+				<td>Proveedor</td>
+				<td>Categoria</td>
 				<td>Acciones</td>
 			</tr>
 		</thead>

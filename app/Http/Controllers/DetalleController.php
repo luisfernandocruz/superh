@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Detalleventa;
 
 class DetalleController extends Controller
 {
@@ -13,7 +14,8 @@ class DetalleController extends Controller
      */
     public function index()
     {
-        //
+        $detalle = Detalleventa::all();
+        return view('detalle.index', ["detalle" => $detalle]);
     }
 
     /**
@@ -23,7 +25,8 @@ class DetalleController extends Controller
      */
     public function create()
     {
-        //
+        $detalle = new Detalleventa;
+        return view("detalle.create", ["detalle" => $detalle]);
     }
 
     /**
@@ -34,7 +37,18 @@ class DetalleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $detalle = new Detalleventa;
+        
+        $detalle->nombre=$request->nombre;
+        /*$categoria->user_id= Auth::user()->id;*/
+        
+        $detalle->save();
+
+        if($detalle->save()){
+            return redirect("/detalle");
+        }else{
+            return view("detalle.create");
+        }
     }
 
     /**
@@ -57,6 +71,8 @@ class DetalleController extends Controller
     public function edit($id)
     {
         //
+        $detalle = Detalleventa::find($id);
+        return view("detalle.edit", ["detalle" => $detalle]);
     }
 
     /**
@@ -69,6 +85,15 @@ class DetalleController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $detalle = Detalleventa::find($id);
+        
+        $detalle->nombre=$request->nombre;
+        
+        if($detalle->save()){
+            return redirect("/detalle");
+        }else{
+            return view("detalle.edit");
+        }
     }
 
     /**
@@ -80,5 +105,8 @@ class DetalleController extends Controller
     public function destroy($id)
     {
         //
+        Detalleventa::destroy($id);
+
+        return redirect('/detalle');
     }
 }

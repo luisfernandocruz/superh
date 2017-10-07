@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Factura;
 
 class FacturaController extends Controller
 {
@@ -13,7 +14,8 @@ class FacturaController extends Controller
      */
     public function index()
     {
-        //
+        $facturas = Factura::all();
+        return view('factura.index', ["factura" => $facturas]);
     }
 
     /**
@@ -23,7 +25,8 @@ class FacturaController extends Controller
      */
     public function create()
     {
-        //
+        $factura = new Factura;
+        return view("factura.create", ["factura" => $factura]);
     }
 
     /**
@@ -35,6 +38,18 @@ class FacturaController extends Controller
     public function store(Request $request)
     {
         //
+        $factura = new Factura;
+        
+        $factura->nombre=$request->nombre;
+        /*$categoria->user_id= Auth::user()->id;*/
+        
+        $factura->save();
+
+        if($factura->save()){
+            return redirect("/factura");
+        }else{
+            return view("factura.create");
+        }
     }
 
     /**
@@ -57,6 +72,8 @@ class FacturaController extends Controller
     public function edit($id)
     {
         //
+        $factura = Factura::find($id);
+        return view("factura.edit", ["factura" => $factura]);
     }
 
     /**
@@ -69,6 +86,15 @@ class FacturaController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $factura = Factura::find($id);
+        
+        $factura->nombre=$request->nombre;
+        
+        if($factura->save()){
+            return redirect("/factura");
+        }else{
+            return view("factura.edit");
+        }
     }
 
     /**
@@ -80,5 +106,8 @@ class FacturaController extends Controller
     public function destroy($id)
     {
         //
+        Factura::destroy($id);
+
+        return redirect('/factura');
     }
 }

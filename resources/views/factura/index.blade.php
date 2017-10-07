@@ -6,25 +6,29 @@
 
 @section('content')
 <div class="big-padding text-center blue-grey white-text">
-	<h1>Proveedores</h1>
+	<h1>Facturas</h1>
 </div>
 <div class="container">
 	<table class="table table-bordered">
 		<thead>
 			<tr>
-				<td>Proveedor</td>
+				<td>Numero de factura</td>
+				<td>Numero de venta</td>
+				<td>Total</td>
 				<td>Acciones</td>
 			</tr>
 		</thead>
 		<tbody>
-			@foreach ($proveedores as $proveedor)
+			@foreach ($factura as $factura)
 			<tr>
 				
-				<td>{{ $proveedor->nombre}}</td>
+				<td>{{ $factura->id}}</td>
+				<td>{{ $factura->venta_id}}</td>
+				<td>{{ $factura->total}}</td>
 				<td>
-					<a href="{{url('/proveedor/'.$proveedor->id.'/edit')}}">Editar</a>
+					<a href="{{url('/factura/'.$factura->id.'/edit')}}">Editar</a>
 
-					@include('proveedor.delete',['proveedor'=>$proveedor])
+					@include('factura.delete',['factura'=>$factura])
 				</td>
 			</tr>
 			@endforeach
@@ -33,7 +37,7 @@
 </div>
 
 <div class="floating">
-	<a href="{{url('/proveedor/create')}}" class="btn btn-primary btn-fab">
+	<a href="{{url('/factura/create')}}" class="btn btn-primary btn-fab">
 		<i class="material-icons">add</i>
 	</a>
 </div>
