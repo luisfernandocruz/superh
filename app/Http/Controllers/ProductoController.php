@@ -15,7 +15,7 @@ class ProductoController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
+    { 
         $producto = Producto::all();
         return view('producto.index', ["producto" => $producto]);
     }

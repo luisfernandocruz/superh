@@ -1,7 +1,6 @@
 {!! Form::open(['url'=> $url, 'method'=>$method]) !!}
 	<div class="form-group">
-		{{Form::text('id', $factura->id, ['class'=>'form-control', 'placeholder'=>'numero de factura...'])}}
-		{{Form::text('venta_id', $factura->venta_id, ['class'=>'form-control', 'placeholder'=>'numero de venta...'])}}
+		{{Form::select('venta_id', $ventas, null, ['class'=>'form-control', 'placeholder'=>'numero de venta...'])}}
 		{{Form::text('total', $factura->total, ['class'=>'form-control', 'placeholder'=>'total...'])}}
 	</div>
 	<div class="form-group text-right">

@@ -9,11 +9,11 @@ class Factura extends Model
     protected $table = 'facturas';
 
     protected $fillable = [
-    	'id', 'total', 
+    	'id', 'venta_id', 'total', 
     ];
 
     protected $hidden = [
-    	'id', 'total', 
+    	'id', 'venta_id', 'total', 
     ];
 
     public function venta()

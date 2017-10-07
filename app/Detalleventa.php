@@ -9,11 +9,11 @@ class Detalleventa extends Model
     protected $table = 'detalleventas';
 
     protected $fillable = [
-    	'venta_id', 'factura_id', 'producto_id', 'precio', 
+    	'venta_id', 'factura_id', 'producto_id', 
     ];
 
     protected $hidden = [
-    	'venta_id', 'factura_id', 'producto_id', 'precio',
+    	'venta_id', 'factura_id', 'producto_id',
     ];
 
     public function venta()

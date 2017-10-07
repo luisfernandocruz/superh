@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Detalleventa;
+use App\Venta;
+use App\Factura;
+use App\Producto;
 
 class DetalleController extends Controller
 {
@@ -26,7 +29,10 @@ class DetalleController extends Controller
     public function create()
     {
         $detalle = new Detalleventa;
-        return view("detalle.create", ["detalle" => $detalle]);
+        $venta=Venta::orderBy('id', 'ASC')->pluck('id', 'id');
+        $factura=Factura::orderBy('id', 'ASC')->pluck('id', 'id');
+        $producto=Producto::orderBy('nombre', 'ASC')->pluck('nombre', 'id');
+        return view("detalle.create", ["detalle" => $detalle])->with('ventas', $venta)->with('facturas', $factura)->with('productos', $producto);
     }
 
     /**
@@ -39,7 +45,9 @@ class DetalleController extends Controller
     {
         $detalle = new Detalleventa;
         
-        $detalle->nombre=$request->nombre;
+        $detalle->venta_id=$request->venta_id;
+        $detalle->factura_id=$request->factura_id;
+        $detalle->producto_id=$request->producto_id;
         /*$categoria->user_id= Auth::user()->id;*/
         
         $detalle->save();
@@ -87,8 +95,10 @@ class DetalleController extends Controller
         //
         $detalle = Detalleventa::find($id);
         
-        $detalle->nombre=$request->nombre;
-        
+        $detalle->venta_id=$request->venta_id;
+        $detalle->factura_id=$request->factura_id;
+        $detalle->producto_id=$request->producto_id;
+
         if($detalle->save()){
             return redirect("/detalle");
         }else{

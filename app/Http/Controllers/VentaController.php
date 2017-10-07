@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Venta;
+use App\User;
 
 class VentaController extends Controller
 {
@@ -26,7 +27,8 @@ class VentaController extends Controller
     public function create()
     {
         $venta = new Venta;
-        return view("venta.create", ["venta" => $venta]);
+        $user=User::orderBy('name', 'ASC')->pluck('name', 'id');
+        return view("venta.create", ["venta" => $venta])->with('users', $user);
     }
 
     /**

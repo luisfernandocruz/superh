@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Factura;
+use App\Venta;
 
 class FacturaController extends Controller
 {
@@ -26,7 +27,8 @@ class FacturaController extends Controller
     public function create()
     {
         $factura = new Factura;
-        return view("factura.create", ["factura" => $factura]);
+        $venta=Venta::orderBy('id', 'ASC')->pluck('id', 'id');
+        return view("factura.create", ["factura" => $factura])->with('ventas', $venta);
     }
 
     /**
@@ -40,7 +42,8 @@ class FacturaController extends Controller
         //
         $factura = new Factura;
         
-        $factura->nombre=$request->nombre;
+        $factura->venta_id=$request->venta_id;
+        $factura->total=$request->total;
         /*$categoria->user_id= Auth::user()->id;*/
         
         $factura->save();
@@ -88,7 +91,8 @@ class FacturaController extends Controller
         //
         $factura = Factura::find($id);
         
-        $factura->nombre=$request->nombre;
+        $factura->venta_id=$request->venta_id;
+        $factura->total=$request->total;
         
         if($factura->save()){
             return redirect("/factura");

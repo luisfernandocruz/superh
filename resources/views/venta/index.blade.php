@@ -12,6 +12,7 @@
 	<table class="table table-bordered">
 		<thead>
 			<tr>
+				<td>Numero de venta</td>
 				<td>Usuario</td>
 				<td>Acciones</td>
 			</tr>
@@ -19,7 +20,7 @@
 		<tbody>
 			@foreach ($venta as $venta)
 			<tr>
-				
+				<td>{{ $venta->id}}</td>
 				<td>{{ $venta->usuario_id}}</td>
 				<td>
 					<a href="{{url('/venta/'.$venta->id.'/edit')}}">Editar</a>
